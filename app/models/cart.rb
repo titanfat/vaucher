@@ -3,7 +3,7 @@ class Cart < ApplicationRecord
   belongs_to :admin
   # has_many :coupon , through: :user, dependent: :destroy
   has_one :coupon, through: :user, dependent: :destroy
-  accepts_nested_attributes_for :coupon, if: lambda { |carts| carts.cart_id.blank? }
+  accepts_nested_attributes_for :coupon, :reject_if lambda { |carts| carts.cart_id.blank? }
   validates_associated :coupon
 
   def total_price
